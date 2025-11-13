@@ -25,7 +25,7 @@ df['Date'] = pd.to_datetime(df['Date'])
 module_name = "Spanish"
 spanish_df = df[df['Module Name'] == module_name]
 ad = spanish_df.groupby('Date')['Attended'].mean()
-#same as info from notebook for coloumns and attendance rate calc
+# Same as info from notebook for coloumns and attendance rate calc
 
 app_ui = ui.page_fluid(
     ui.h2("Attendance Rate Chart for Spanish"),
@@ -41,7 +41,7 @@ app_ui = ui.page_fluid(
     ),
     ui.output_plot("attendance_plot")
 )
-#interactive functions and space for chart
+# Interactive functions and space for chart
 
 def server(input, output, session):
     @output()
@@ -60,13 +60,13 @@ def server(input, output, session):
         else:
             plot_data.index = plot_data.index.strftime('%Y-%m-%d')
             plot_data.plot.bar(ax=ax)
-            #format date labels for bar chart
+            # Format date labels for bar chart
 
         ax.set_title("Attendance Rate Over Time for Spanish")
         ax.set_xlabel("Date")
         ax.set_ylabel("Average Attendance Rate")
         plt.setp(ax.get_xticklabels(), rotation=45, ha="right")
         return fig
-    #chart formatting
+    # Chart formatting
 
 app = App(app_ui, server)
